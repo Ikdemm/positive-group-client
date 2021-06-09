@@ -2,20 +2,23 @@ const router = require("express").Router();
 const usersController = require("../controllers/users.controller");
 const requestsController = require("../controllers/requests.controller");
 
-const upload = require("../middlewares/multer")
+const upload = require("../middlewares/multer");
 
 // router.post("/bonus/:id", usersController.generateCode)
 
 // router.get("/bonus/:userId", usersController.getInvitees)
-router.put("/activate-account/:userId", usersController.activateAccount)
+router.put("/activate-account/:userId", usersController.activateAccount);
 
-router.post("/activation/:userId", requestsController.requestActivation)
+router.post("/activation/:userId", requestsController.requestActivation);
 
 router.get("/:token", usersController.getUserByToken);
 router.put("/:userId", usersController.updateUser);
 
-router.put("/:userId", upload.single("userImage"), usersController.updateUser)
-
+router.post(
+  "/image/:userId",
+  upload.single("image"),
+  usersController.updateUserImage
+);
 
 module.exports = router;
 
@@ -38,7 +41,7 @@ module.exports = router;
  *         description: Error
  *       "200":
  *         description: Success
-*/
+ */
 
 /**
  * @swagger
@@ -59,8 +62,7 @@ module.exports = router;
  *         description: Error
  *       "200":
  *         description: Success
-*/
-
+ */
 
 /**
  * @swagger
@@ -98,8 +100,7 @@ module.exports = router;
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
-*/
-
+ */
 
 /**
  * @swagger
@@ -123,9 +124,7 @@ module.exports = router;
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
-*/
-
-
+ */
 
 /**
  * @swagger
@@ -190,4 +189,4 @@ module.exports = router;
  *              type: string
  *              description: courseId
  *
-*/
+ */

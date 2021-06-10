@@ -3,6 +3,8 @@ const User = require("../models/User");
 const ActivationCode = require("../models/ActivationCode");
 
 const repository = require("../repositories/base.repository");
+const filesRepository = require("../repositories/files.repository");
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtDecode = require("jwt-decode");
@@ -38,7 +40,7 @@ module.exports = {
         { usedBy: userId }
       );
     } else {
-      res.status(405).send("Code is already used!");
+      res.send({ message: "Code est déjà utilisé!" });
     }
     let user = await User.findByIdAndUpdate(
       { _id: userId },

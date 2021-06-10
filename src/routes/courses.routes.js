@@ -6,7 +6,7 @@ const Course = require("../models/Course");
 // Retrieving existing Courses
 router.get("/", coursesController.getAllCourses);
 router.get("/:courseId", coursesController.getCourseById)
-router.post("/:courseId", coursesController.getCourseById)
+// router.post("/:courseId", coursesController.getCourseById)
 router.post("/unlock/:courseId", coursesController.unlockCourse)
 
 module.exports = router;

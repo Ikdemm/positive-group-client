@@ -68,9 +68,9 @@ module.exports = {
     let payload = req.body;
     let user = await repository.findOne({ email: payload.email }, User);
     if (!bcrypt.compareSync(payload.oldPassword, user.password)) {
-      res.send({ message: "Wrong old password!" });
+      res.send({ error: "Mot de passe ancien incorrect!" });
     } else if (payload.newPassword == payload.oldPassword) {
-      res.send({ message: "Same old and new password!" });
+      res.send({ error: "Nouveau et ancien mot de passe identiques!" });
     } else {
       payload.newPassword = bcrypt.hashSync(payload.newPassword, 10);
       let updatedUser = await repository.findOneAndUpdate(
